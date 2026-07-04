@@ -89,9 +89,4 @@ This runs every frame:
 **Score**
 A separate `setInterval` bumps `score` once per second, and `drawScore()` converts the score to a string, looks up each digit's sprite frame, and draws them side by side.
 
-**Bugs worth knowing about** (I flagged these in the README too):
-- The obstacle-removal check uses `obstacle[i].width` — that property doesn't exist (you used `w`, not `width`), so old obstacles never get removed from the array. Over a long game this array just keeps growing.
-- `cancelAnimationFrame(animation)` is called with the function itself instead of the ID returned by `requestAnimationFrame`. That call does nothing — the loop actually stops because of the `return` right after it, not because of that line.
-- There's a bit of a race in the startup: `loadSpriteSheetData(gamMenu)` is called at the bottom, but `gamMenu` isn't actually used as a callback there (loading is fully async via its own `.then()` chains), so passing it as an argument has no effect.
 
-Want me to actually go in and fix any of these (obstacle cleanup, restart flow, etc.)?
